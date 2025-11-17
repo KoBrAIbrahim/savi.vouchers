@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Voucher App Redirect</title>
+
+  <script>
+    // 👉 Edit your deep link
+    const deepLink = "voucherapp://app.voucherapp.com/promo?code=123";
+
+    // 👉 Store fallback links (replace with real App Store & Play Store URLs)
+    const iosStore = "https://apps.apple.com/app/idYOUR_APP_ID";
+    const androidStore = "https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME";
+
+    // Detect OS
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    const isAndroid = /Android/i.test(navigator.userAgent);
+
+    // Try to open app
+    function openApp() {
+      window.location = deepLink;
+
+      // If app not installed → redirect to store
+      setTimeout(() => {
+        if (isIOS) window.location = iosStore;
+        else if (isAndroid) window.location = androidStore;
+      }, 1500);
+    }
+  </script>
+</head>
+
+<body onload="openApp()">
+  <h2>Opening Voucher App...</h2>
+</body>
+</html>
